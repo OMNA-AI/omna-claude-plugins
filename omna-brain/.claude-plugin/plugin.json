@@ -1,0 +1,7 @@
+{
+  "name": "omna-brain",
+  "version": "0.1.0",
+  "description": "Cerebro técnico de OMNA en tu editor: postura de seguridad (radar OWASP + tendencia), hallazgos de vulnerabilidades y grafo de símbolos del repo ingerido — scope-aware por API-key y solo-lectura. La key estrechada a un repo nunca ve el resto del workspace.",
+  "author": { "name": "OMNA", "url": "https://omna.club" },
+  "homepage": "https://brain.omna.club"
+}

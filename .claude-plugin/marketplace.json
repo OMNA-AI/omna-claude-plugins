@@ -1,0 +1,11 @@
+{
+  "name": "omna",
+  "owner": { "name": "OMNA", "url": "https://omna.club" },
+  "plugins": [
+    {
+      "name": "omna-brain",
+      "source": "./omna-brain",
+      "description": "Cerebro técnico de OMNA en tu editor: postura de seguridad, vulnerabilidades, grafo de símbolos y recomendaciones counterfactual — scope-aware por API-key, solo-lectura."
+    }
+  ]
+}

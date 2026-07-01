@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "omna-brain": {
+      "type": "http",
+      "url": "https://brain.omna.club/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${OMNA_API_KEY}"
+      }
+    }
+  }
+}
