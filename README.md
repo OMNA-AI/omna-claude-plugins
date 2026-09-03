@@ -1,20 +1,37 @@
-# OMNA — Claude Code plugins
+# OMNA — Claude Code plugins · **RETIRADO (2026-09-03)**
 
-Marketplace público de plugins de Claude Code de OMNA (modelo descentralizado).
-El **acceso a datos** lo gatea tu **API-key de OMNA** (scopeada, por-usuario), no el repo.
+> **Este plugin ya no se mantiene y no debe instalarse.** No se publicó nunca a clientes.
+> El repositorio queda archivado como registro; lo que hacía vive ahora en dos sitios
+> distintos, a propósito.
 
-## Instalar
-```
-export OMNA_API_KEY=op_…          # tu key de OMNA (pídela a OMNA)
-```
-En Claude Code:
-```
-/plugin marketplace add OMNA-AI/omna-claude-plugins
-/plugin install omna-brain@omna
-/mcp     # verifica que "omna-brain" esté conectado
+## Qué usar en su lugar
+
+**Para conectarte al cerebro de OMNA (las tools MCP), declara el servidor a mano con tu clave
+literal:**
+
+```bash
+claude mcp add omna-brain https://brain.omna.club/api/mcp \
+  --transport http -s user \
+  --header "Authorization: Bearer op_TU_CLAVE"
 ```
 
-## Qué trae el plugin `omna-brain`
-Cerebro técnico de OMNA en tu editor (solo-lectura, scope-aware por la key):
-postura de seguridad, hallazgos de vulnerabilidades, grafo de símbolos, charter
-del proyecto, y **recomendaciones** de mejora del código (`get_recommendations`).
+La clave se emite en `brain.omna.club` → Configuración → **Claves API**. **Elige un ÁREA**: una
+clave sin vincular no sirve para MCP (el servidor la rechaza). Si trabajas en varias áreas de la
+misma organización, márcalas en «Otras áreas que abarca» y **una sola clave las cubre** — el
+cliente las lista con `list_workspaces` y elige con el parámetro `workspaceId` de cada tool.
+
+**Las skills** (`omna-code-context`, `omna-security-posture`, `omna-design-check`,
+`omna-coaching-mode`, `omna-recommendations`) viven en `.claude/skills/` del repo `omna-brain`,
+donde llegan con un `git pull` en vez de haber que instalarlas.
+
+## Por qué se retiró, en una línea
+
+Empaquetaba juntas dos cosas que pertenecen a canales distintos: el **transporte** (la conexión
+MCP) y el **valor** (las skills). Su `.mcp.json` declaraba el servidor con
+`Authorization: Bearer ${OMNA_API_KEY}`, así que el transporte se podía declarar **dos veces** —el
+plugin y la config de la persona, ambos con el mismo nombre— y **fallaba en silencio**: si la
+variable de entorno no estaba donde Claude Code la ve, el header viajaba literal y el servidor
+respondía el mismo 401 que daría una clave inexistente.
+
+La regla que quedó: **el transporte es configuración por persona y va con credencial literal; el
+valor va en el repo.**
